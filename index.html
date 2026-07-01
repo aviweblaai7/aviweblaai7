@@ -36,26 +36,34 @@
         text-decoration: none;
         font-size: 16px;
         font-weight: 500;
+        cursor: pointer;
       }
 
       nav ul li a:hover {
         color: #e94560;
       }
 
+      nav ul li a.active {
+        color: #e94560;
+        border-bottom: 2px solid #e94560;
+        padding-bottom: 3px;
+      }
+
       #hero {
         background-color: #1a1a2e;
         color: #fff;
         text-align: center;
-        padding: 100px 20px;
+        padding: 40px 20px;
+        display: none;
       }
 
       #hero h1 {
-        font-size: 48px;
-        margin-bottom: 15px;
+        font-size: 32px;
+        margin-bottom: 10px;
       }
 
       #hero p {
-        font-size: 20px;
+        font-size: 16px;
         color: #e94560;
       }
 
@@ -63,6 +71,11 @@
         padding: 60px 40px;
         max-width: 900px;
         margin: 0 auto;
+        display: none;
+      }
+
+      section.active {
+        display: block;
       }
 
       section h2 {
@@ -133,11 +146,11 @@
 
     <nav>
       <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#learning">Learning</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#hobbies">Hobbies</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#" onclick="showSection('about')" id="nav-about" class="active">About</a></li>
+        <li><a href="#" onclick="showSection('learning')" id="nav-learning">Learning</a></li>
+        <li><a href="#" onclick="showSection('projects')" id="nav-projects">Projects</a></li>
+        <li><a href="#" onclick="showSection('hobbies')" id="nav-hobbies">Hobbies</a></li>
+        <li><a href="#" onclick="showSection('contact')" id="nav-contact">Contact</a></li>
       </ul>
     </nav>
 
@@ -146,7 +159,7 @@
       <p>BCom Information Systems Student | Aspiring Software Developer</p>
     </section>
 
-    <section id="about">
+    <section id="about" class="active">
       <h2>About Me</h2>
       <p>I am a final-year BCom Information Systems student at the University of Fort Hare, passionate about software development and financial technology. I am currently attending the UCT Cortex Hub FinTech Lab Winter School 2026.</p>
     </section>
@@ -166,7 +179,7 @@
       <h2>Projects</h2>
       <div class="project">
         <h3>EasternDigital</h3>
-        <p>A student service marketplace built for the Emergent Technologies module (IFS313E) at the University of Fort Hare. My contribution focused on frontend development and UI/UX design with background backend development.</p>
+        <p>A student service marketplace built for the Emergent Technologies module (IFS313E) at the University of Fort Hare. My contribution focused on frontend development and UI/UX design.</p>
       </div>
       <div class="project">
         <h3>Student Marketplace Listing Tool</h3>
@@ -196,6 +209,24 @@
         <a href="https://github.com/aviweblaai7" target="_blank">GitHub</a>
       </p>
     </footer>
+
+    <script>
+      function showSection(sectionId) {
+        var sections = document.querySelectorAll('section:not(#hero)');
+        sections.forEach(function(section) {
+          section.classList.remove('active');
+        });
+
+        var navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(function(link) {
+          link.classList.remove('active');
+        });
+
+        document.getElementById(sectionId).classList.add('active');
+        document.getElementById('nav-' + sectionId).classList.add('active');
+        document.getElementById('hero').style.display = sectionId === 'about' ? 'block' : 'none';
+      }
+    </script>
 
   </body>
 </html>
